@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="mineSweeper.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="gameBoard"></div>
+    <img src="https://w7.pngwing.com/pngs/38/799/png-transparent-minesweeper-free-mine-sweeper-mono-android-game-android-game-cat-like-mammal-carnivoran-thumbnail.png" alt="mine" id="mine">
+    <div class="container">
+        <span id="span2">
+        <h1 id="h1">You Lost</h1>
+        <div id="clocks">
+            <img src="https://static-00.iconduck.com/assets.00/clock-icon-2048x2048-org46qq3.png" alt="time" id="time">
+            <img src="https://static.vecteezy.com/system/resources/previews/011/934/432/original/gold-clock-icon-free-png.png" alt="timeRecord" id="timeRecord">
+        </div>
+    </span>
+    <div id="select">
+        <button id="menu">Main Menu</button>
+        <button id="restart">Restart</button>
+    </div>
+    </div>
+    <div class="mainMenu">
+        <button id="play">Play</button>
+        <button id="gameSize">Game Size <span id="span1" style="font-size: 15px;">&#9947;</span></button>
+        <ul id="selectSize">
+            <li id="list1" style="border-bottom: 1px solid;text-align: center;">10x10</li>
+            <li id="list2" style="text-align: center;">15x15</li>
+        </ul>
+    </div>
+    <script src="mineSweeper.js"></script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+.gameBoard{
+    display: grid;
+    grid-template-rows: repeat(10,60px);
+    grid-template-columns: repeat(10,60px);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+.button{
+    position: relative;
+    font-size: 25px;
+    background-color: #ADFF2F;
+    border: 0px solid;
+}
+.button2{
+    position: relative;
+    font-size: 25px;
+    background-color: #ccff80;
+    border: 0px solid;
+}
+.flag{
+    height: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    
+}
+#mine{
+    height: 30px;
+    visibility: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+h1{
+    padding-top: 10px;
+    font-size: 50px;
+}
+#span2{
+    background-color: aliceblue;
+    height: 300px;
+    width: 500px;
+    text-align: center;
+    border-radius: 10px;
+    z-index: 1;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-70%);
+}
+#menu,#restart{
+    width: 240px;
+    border-radius: 10px;
+}
+#select{
+    width: 500px;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 1;
+    position: absolute;
+    left: 50%;
+    top: 70%;
+    transform: translate(-50%,-50%);
+}
+#time{
+    height: 50px;
+}
+#timeRecord{
+    height: 50px;
+}
+#clocks{
+    margin-top: 60px;
+    display: flex;
+    justify-content: space-evenly;
+}
+.container{
+    display: none;
+}
+body{
+    background-color: #808080;
+}
+#play,#gameSize{
+    width: 240px;
+    border-radius: 10px;
+    height: 70px;
+    font-size: 30px;
+}
+#play{
+    position: absolute;
+    left: 50%;
+    top: 35%;
+    transform: translate(-50%,-50%);
+}
+#gameSize{
+    position: absolute;
+    left: 50%;
+    top: 65%;
+    transform: translate(-50%,-50%);
+}
+.mainMenu{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    height: 500px;
+    width: 600px;
+    background-color: #d6ff99;
+    display: flex;
+    flex-direction: column;
+}
+#span1{
+    margin-left: 10px;
+}
+#selectSize{
+    background-color: aliceblue;
+    border-radius: 10px;
+    padding: 0;
+    list-style-type: none;
+    width: 240px;
+    border: 1px solid;
+    cursor: default;
+    position: absolute;
+    left: 50%;
+    top: 73%;
+    transform: translate(-50%,-50%);
+}
+#list1{
+    color: blueviolet;
+}
