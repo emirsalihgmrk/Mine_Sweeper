@@ -55,7 +55,7 @@ function randomItem(array) {
 }
 let clickCounter = 0;
 function clickBox(array,i,j) {
-    audio = new Audio("c:\\Users\\emirs\\Downloads\\703922__cuanmamang__cloth1.ogg");
+    let audio = new Audio("C:\Users\emirs\sites\Mine_Sweeper\\703922__cuanmamang__cloth1 (1).ogg");
     audio.play();
     let counter = 0;
     let left = j-1;
