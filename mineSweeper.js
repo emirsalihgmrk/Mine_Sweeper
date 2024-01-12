@@ -1,24 +1,26 @@
 let gameBoard = document.querySelector(".gameBoard")
+let mine = document.querySelector("#mine")
 let flag = document.createElement("img")
 flag.src = "https://cdn.icon-icons.com/icons2/510/PNG/512/flag_icon-icons.com_50393.png"
 flag.id = "flag"
 flag.classList.add("flag")
 let container = document.querySelector(".container")
-let rows=10;
-let cols=10;
-let mineCount=15;
-let flagCount=15;
-function run(){
-    mineSweeper = randomItem(createBoard(rows,cols))
-    for(let i=0;i<mineSweeper.length;i++){
-        for(let j=0;j<mineSweeper[i].length;j++){
-            mineSweeper[i][j].addEventListener("click",function(event){
+let rows = 10;
+let cols = 10;
+let mineCount = 15;
+let flagCount = 15;
+let mineSweeper;
+function run() {
+    mineSweeper = randomItem(createBoard(rows, cols))
+    for (let i = 0; i < mineSweeper.length; i++) {
+        for (let j = 0; j < mineSweeper[i].length; j++) {
+            mineSweeper[i][j].addEventListener("click", function (event) {
                 event.preventDefault();
-                clickBox(mineSweeper,i,j)
+                clickBox(mineSweeper, i, j)
             })
-            mineSweeper[i][j].addEventListener("contextmenu",function(event){
+            mineSweeper[i][j].addEventListener("contextmenu", function (event) {
                 event.preventDefault();
-                EventOfFlag(mineSweeper,i,j)
+                EventOfFlag(mineSweeper, i, j)
             })
         }
     }
@@ -29,12 +31,12 @@ function createBoard(rows, cols) {
         let row = []
         for (let j = 0; j < cols; j++) {
             let button = document.createElement("button")
-            if((i+j)%2==0){
+            if ((i + j) % 2 == 0) {
                 button.classList.add("button")
-            }else{
+            } else {
                 button.classList.add("button2")
             }
-            
+
             row.push(button);
             gameBoard.appendChild(button)
         }
@@ -54,24 +56,26 @@ function randomItem(array) {
     return array;
 }
 let clickCounter = 0;
-function clickBox(array,i,j) {
-    let audio = new Audio("C:\Users\emirs\sites\Mine_Sweeper\\703922__cuanmamang__cloth1 (1).ogg");
-    audio.play();
+function clickBox(array, i, j) {
     let counter = 0;
-    let left = j-1;
-    let right = j+1;
-    let up = i-1;
-    let down = i+1;
-    if(array[i][j].querySelector("#mine")){
-        for(let i=0;i<array.length;i++){
-            for(let j=0;j<array[i].length;j++){
+    let left = j - 1;
+    let right = j + 1;
+    let up = i - 1;
+    let down = i + 1;
+    if (array[i][j].querySelector("#mine") && (!array[i][j].querySelector("#flag"))) {
+        for (let i = 0; i < array.length; i++) {
+            for (let j = 0; j < array[i].length; j++) {
                 array[i][j].disabled = true;
             }
         }
         flagCount = 0;
         array[i][j].querySelector("#mine").style.visibility = "visible";
+        clearTimeout(timeoutId);
+        hour = 0;
+        min = 0;
+        sec = 0;
         showMine(array);
-    } else if(!array[i][j].querySelector("#flag")) {
+    } else if (!array[i][j].querySelector("#flag")) {
         if (left >= 0) {
             if (array[i][left].querySelector("#mine")) {
                 counter++;
@@ -112,45 +116,49 @@ function clickBox(array,i,j) {
                 counter++;
             }
         }
-        if((i+j)%2==0){
+        if ((i + j) % 2 == 0) {
             array[i][j].style.backgroundColor = "rgb(246, 240, 186)";
-        }else{
+        } else {
             array[i][j].style.backgroundColor = "rgb(250, 246, 215)";
         }
-        if(counter!=0){
+        if (counter != 0) {
             array[i][j].textContent = counter;
-            if(counter==1){array[i][j].style.color="#87CEFA"}
-            if(counter==2){array[i][j].style.color="#00FF00"}
-            if(counter==3){array[i][j].style.color="#FF0000"}
-            if(counter==4){array[i][j].style.color="#800080"}
-            if(counter==5){array[i][j].style.color="#FFA500"}
-            if(counter==6){array[i][j].style.color="#FF00FF"}
-            if(counter==7){array[i][j].style.color="#000080"}
-            if(counter==8){array[i][j].style.color="#A52A2A"}
+            if (counter == 1) { array[i][j].style.color = "#87CEFA" }
+            if (counter == 2) { array[i][j].style.color = "#00FF00" }
+            if (counter == 3) { array[i][j].style.color = "#FF0000" }
+            if (counter == 4) { array[i][j].style.color = "#800080" }
+            if (counter == 5) { array[i][j].style.color = "#FFA500" }
+            if (counter == 6) { array[i][j].style.color = "#FF00FF" }
+            if (counter == 7) { array[i][j].style.color = "#000080" }
+            if (counter == 8) { array[i][j].style.color = "#A52A2A" }
         }
     }
-    if(clickCounter==array.length**2-mineCount-1){
-        for(let i=0;i<array.length;i++){
-            for(let j=0;j<array[i].length;j++){
+    if (clickCounter == array.length ** 2 - mineCount - 1) {
+        for (let i = 0; i < array.length; i++) {
+            for (let j = 0; j < array[i].length; j++) {
                 array[i][j].disabled = true;
             }
         }
         flagCount = 0;
+        clearTimeout(timeoutId);
+        hour = 0;
+        min = 0;
+        sec = 0;
         container.style.display = "block"
         document.querySelector("#h1").textContent = "You Win"
     }
     clickCounter++;
 }
-function showMine(array){
-    for(let i=0;i<array.length;i++){
-        for(let j=0;j<array[i].length;j++){
-            if(array[i][j].querySelector("#mine")){
+function showMine(array) {
+    for (let i = 0; i < array.length; i++) {
+        for (let j = 0; j < array[i].length; j++) {
+            if (array[i][j].querySelector("#mine")) {
                 setTimeout(() => {
-                    if(array[i][j].querySelector("#flag")){
+                    if (array[i][j].querySelector("#flag")) {
                         array[i][j].removeChild(array[i][j].querySelector("#flag"))
                     }
                     array[i][j].querySelector("#mine").style.visibility = "visible";
-                },i*300+j*300);
+                }, i * 300 + j * 300);
             }
         }
     }
@@ -159,28 +167,29 @@ function showMine(array){
         container.style.display = "block";
     }, 6000);
 }
-function EventOfFlag(array,i,j){
-    if((flagCount!=0)&&(array[i][j].querySelector("#flag") === null)&&(getComputedStyle(array[i][j]).backgroundColor!=="rgb(246, 240, 186)")&&(getComputedStyle(array[i][j]).backgroundColor!=="rgb(250, 246, 215)")){
+function EventOfFlag(array, i, j) {
+    if ((flagCount != 0) && (array[i][j].querySelector("#flag") === null) && (getComputedStyle(array[i][j]).backgroundColor !== "rgb(246, 240, 186)") && (getComputedStyle(array[i][j]).backgroundColor !== "rgb(250, 246, 215)")) {
         array[i][j].appendChild(flag.cloneNode(true))
         flagCount--;
-    }else if(array[i][j].querySelector("#flag")){
+    } else if (array[i][j].querySelector("#flag")) {
         array[i][j].removeChild(array[i][j].querySelector("#flag"))
         flagCount++;
     }
 }
 let restart = document.querySelector("#restart")
-restart.addEventListener("click",function(){
+restart.addEventListener("click", function () {
     clickCounter = 0;
-    if(rows==10){
+    if (rows == 10) {
         flagCount = 15;
-    }else{
+    } else {
         flagCount = 35;
     }
     container.style.display = "none";
-    while(gameBoard.firstChild){
+    while (gameBoard.firstChild) {
         gameBoard.removeChild(gameBoard.firstChild)
     }
     run();
+    timer();
 })
 
 let mainMenu = document.querySelector(".mainMenu")
@@ -188,22 +197,22 @@ let gameSize = document.querySelector("#gameSize")
 let selectSize = document.querySelector("#selectSize")
 selectSize.style.display = "none";
 
-gameSize.addEventListener("click",function(){
-    selectSize.style.display = selectSize.style.display === "none" ? "block" : "none"; 
+gameSize.addEventListener("click", function () {
+    selectSize.style.display = selectSize.style.display === "none" ? "block" : "none";
 })
 
 let list1 = document.querySelector("#list1");
 let list2 = document.querySelector("#list2")
 let menu = document.querySelector("#menu")
-menu.addEventListener("click",function(){
-    while(gameBoard.firstChild){
+menu.addEventListener("click", function () {
+    while (gameBoard.firstChild) {
         gameBoard.removeChild(gameBoard.firstChild)
     }
     mainMenu.style.display = "block";
     container.style.display = "none";
 })
 
-list1.addEventListener("click",function(){
+list1.addEventListener("click", function () {
     rows = 10;
     cols = 10;
     mineCount = 15;
@@ -214,7 +223,7 @@ list1.addEventListener("click",function(){
     list2.style.color = "black";
 })
 
-list2.addEventListener("click",function(){
+list2.addEventListener("click", function () {
     rows = 15;
     cols = 15;
     mineCount = 35;
@@ -227,14 +236,47 @@ list2.addEventListener("click",function(){
     list1.style.color = "black";
 })
 let play = document.querySelector("#play")
-play.addEventListener("click",function(){
+play.addEventListener("click", function () {
     clickCounter = 0;
-    if(rows==10){
+    if (rows == 10) {
         flagCount = 15;
-    }else{
+    } else {
         flagCount = 35;
     }
     mainMenu.style.display = "none";
     selectSize.style.display = "none";
     run();
+    timer();
 })
+let clockText = document.querySelector("#clockText");
+let hour = 0;
+let min = 0;
+let sec = 0;
+let timeoutId;
+function timer(){
+    clockText.textContent = updateTime(hour,min,sec);
+    sec++;
+    if(sec==60){
+        sec = 0;
+        min++;
+    }
+    if(min==60){
+        min = 0;
+        hour++;
+    }
+    if(hour==60){
+        hour = 0;
+    }
+    timeoutId = setTimeout(timer,1000);
+}
+function updateTime(hour,min,sec){
+    sec = sec < 10 ? "0" + sec : sec;
+    min = min < 10 ? "0" + min : min;
+    hour = hour < 10 ? "0" + hour : hour;
+    return hour + ":" + min + ":" + sec;
+}
+
+
+
+
+

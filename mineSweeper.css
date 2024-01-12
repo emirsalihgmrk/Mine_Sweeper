@@ -131,3 +131,34 @@ body{
 #list1{
     color: blueviolet;
 }
+#clockMain{
+    height: 50px;
+}
+#clockText{
+    color: white;
+    font-size: 25px;
+}
+.mainTime{
+    text-align: center;
+    width: 120px;
+    position: absolute;
+    top: 40%;
+    left: 25%;
+    transform: translate(-50%,-50%);
+}
+#flagMain{
+    height: 50px;
+}
+#flagText{
+    color: white;
+    margin-right: 5px;
+    font-size: 25px;
+}
+.mainFlag{
+    text-align: center;
+    width: 60px;
+    position: absolute;
+    top: 60%;
+    left: 25%;
+    transform: translate(-50%,-50%);
+}
