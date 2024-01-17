@@ -1,10 +1,24 @@
-let gameBoard = document.querySelector(".gameBoard")
-let mine = document.querySelector("#mine")
-let flag = document.createElement("img")
+let gameBoard = document.querySelector(".gameBoard");
+let flagText = document.querySelector("#flagText");
+let clockText = document.querySelector("#clockText");
+let timeText = document.querySelector("#timeText");
+let timeRecordText = document.querySelector("#timeRecordText");
+let firstClock = document.querySelector(".firstClock");
+let secondClock = document.querySelector(".secondClock");
+let mainItems = document.querySelector(".mainItems");
+let container = document.querySelector(".container");
+let mainMenu = document.querySelector(".mainMenu");
+let gameSize = document.querySelector("#gameSize");
+let selectSize = document.querySelector("#selectSize");
+let list1 = document.querySelector("#list1");
+let list2 = document.querySelector("#list2");
+let menu = document.querySelector("#menu");
+let mine = document.querySelector("#mine");
+let flag = document.createElement("img");
+let bestTime;
 flag.src = "https://cdn.icon-icons.com/icons2/510/PNG/512/flag_icon-icons.com_50393.png"
 flag.id = "flag"
 flag.classList.add("flag")
-let container = document.querySelector(".container")
 let rows = 10;
 let cols = 10;
 let mineCount = 15;
@@ -68,8 +82,11 @@ function clickBox(array, i, j) {
                 array[i][j].disabled = true;
             }
         }
+        clickCounter = 0;
         flagCount = 0;
         array[i][j].querySelector("#mine").style.visibility = "visible";
+        timeText.textContent = "-----";
+        firstClock.style.width = "60px";
         clearTimeout(timeoutId);
         hour = 0;
         min = 0;
@@ -141,6 +158,13 @@ function clickBox(array, i, j) {
         }
         flagCount = 0;
         clearTimeout(timeoutId);
+        timeText.textContent = updateTime(hour,min,sec);
+        if((timeRecordText.textContent==="-----")||(bestTime > hour*3600+min*60+sec)){
+            bestTime = hour*3600+min*60+sec;
+            timeRecordText.textContent = updateTime(hour,min,sec);
+        }
+        firstClock.style.width = "120px";
+        secondClock.style.width = "120px";
         hour = 0;
         min = 0;
         sec = 0;
@@ -171,9 +195,11 @@ function EventOfFlag(array, i, j) {
     if ((flagCount != 0) && (array[i][j].querySelector("#flag") === null) && (getComputedStyle(array[i][j]).backgroundColor !== "rgb(246, 240, 186)") && (getComputedStyle(array[i][j]).backgroundColor !== "rgb(250, 246, 215)")) {
         array[i][j].appendChild(flag.cloneNode(true))
         flagCount--;
+        flagText.textContent = flagCount;
     } else if (array[i][j].querySelector("#flag")) {
         array[i][j].removeChild(array[i][j].querySelector("#flag"))
         flagCount++;
+        flagText.textContent = flagCount;
     }
 }
 let restart = document.querySelector("#restart")
@@ -185,33 +211,27 @@ restart.addEventListener("click", function () {
         flagCount = 35;
     }
     container.style.display = "none";
+    flagText.textContent = flagCount;
     while (gameBoard.firstChild) {
         gameBoard.removeChild(gameBoard.firstChild)
     }
     run();
     timer();
 })
-
-let mainMenu = document.querySelector(".mainMenu")
-let gameSize = document.querySelector("#gameSize")
-let selectSize = document.querySelector("#selectSize")
 selectSize.style.display = "none";
-
 gameSize.addEventListener("click", function () {
     selectSize.style.display = selectSize.style.display === "none" ? "block" : "none";
 })
 
-let list1 = document.querySelector("#list1");
-let list2 = document.querySelector("#list2")
-let menu = document.querySelector("#menu")
+
 menu.addEventListener("click", function () {
+    mainItems.style.display = "none";
     while (gameBoard.firstChild) {
         gameBoard.removeChild(gameBoard.firstChild)
     }
     mainMenu.style.display = "block";
     container.style.display = "none";
 })
-
 list1.addEventListener("click", function () {
     rows = 10;
     cols = 10;
@@ -222,7 +242,6 @@ list1.addEventListener("click", function () {
     list1.style.color = "blueviolet";
     list2.style.color = "black";
 })
-
 list2.addEventListener("click", function () {
     rows = 15;
     cols = 15;
@@ -237,6 +256,7 @@ list2.addEventListener("click", function () {
 })
 let play = document.querySelector("#play")
 play.addEventListener("click", function () {
+    mainItems.style.display = "block";
     clickCounter = 0;
     if (rows == 10) {
         flagCount = 15;
@@ -245,10 +265,10 @@ play.addEventListener("click", function () {
     }
     mainMenu.style.display = "none";
     selectSize.style.display = "none";
+    flagText.textContent = flagCount;
     run();
     timer();
 })
-let clockText = document.querySelector("#clockText");
 let hour = 0;
 let min = 0;
 let sec = 0;

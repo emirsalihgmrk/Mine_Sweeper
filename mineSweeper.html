@@ -13,8 +13,14 @@
         <span id="span2">
         <h1 id="h1">You Lost</h1>
         <div id="clocks">
-            <img src="https://static-00.iconduck.com/assets.00/clock-icon-2048x2048-org46qq3.png" alt="time" id="time">
-            <img src="https://static.vecteezy.com/system/resources/previews/011/934/432/original/gold-clock-icon-free-png.png" alt="timeRecord" id="timeRecord">
+            <div class="firstClock">
+                <img src="https://static-00.iconduck.com/assets.00/clock-icon-2048x2048-org46qq3.png" alt="time" id="time">
+                <span id="timeText">-----</span>
+            </div>
+            <div class="secondClock">
+                <img src="https://static.vecteezy.com/system/resources/previews/011/934/432/original/gold-clock-icon-free-png.png" alt="timeRecord" id="timeRecord">
+                <span id="timeRecordText">-----</span>
+            </div>
         </div>
     </span>
     <div id="select">
@@ -30,13 +36,15 @@
             <li id="list2" style="text-align: center;">15x15</li>
         </ul>
     </div>
-    <div class="mainTime">
-        <img src="https://static-00.iconduck.com/assets.00/clock-icon-2048x2048-org46qq3.png" alt="clockMain" id="clockMain">
-        <span id="clockText">00:00:00</span>
-    </div>
-    <div class="mainFlag">
-        <img src="https://cdn.icon-icons.com/icons2/510/PNG/512/flag_icon-icons.com_50393.png" alt="flagMain" id="flagMain">
-        <span id="flagText">15</span>
+    <div class="mainItems">
+        <div class="mainTime">
+            <img src="https://static-00.iconduck.com/assets.00/clock-icon-2048x2048-org46qq3.png" alt="clockMain" id="clockMain">
+            <span id="clockText">00:00:00</span>
+        </div>
+        <div class="mainFlag">
+            <img src="https://cdn.icon-icons.com/icons2/510/PNG/512/flag_icon-icons.com_50393.png" alt="flagMain" id="flagMain">
+            <span id="flagText">15</span>
+        </div>
     </div>
     <script src="mineSweeper.js"></script>
 </body>

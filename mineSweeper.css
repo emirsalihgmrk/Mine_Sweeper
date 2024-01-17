@@ -162,3 +162,13 @@ body{
     left: 25%;
     transform: translate(-50%,-50%);
 }
+.firstClock,.secondClock{
+    text-align: center;
+    width: 60px;
+}
+#timeText,#timeRecordText{
+    font-size: 25px;
+}
+.mainItems{
+    display: none;
+}
