@@ -16,6 +16,7 @@ let menu = document.querySelector("#menu");
 let mine = document.querySelector("#mine");
 let flag = document.createElement("img");
 let bestTime;
+let clickCounter = 0;
 flag.src = "https://cdn.icon-icons.com/icons2/510/PNG/512/flag_icon-icons.com_50393.png"
 flag.id = "flag"
 flag.classList.add("flag")
@@ -69,8 +70,10 @@ function randomItem(array) {
     }
     return array;
 }
-let clickCounter = 0;
 function clickBox(array, i, j) {
+    array[i][j].disabled = true;
+    clickCounter++;
+    console.log(clickCounter)
     let counter = 0;
     let left = j - 1;
     let right = j + 1;
@@ -150,7 +153,7 @@ function clickBox(array, i, j) {
             if (counter == 8) { array[i][j].style.color = "#A52A2A" }
         }
     }
-    if (clickCounter == array.length ** 2 - mineCount - 1) {
+    if (clickCounter === array.length ** 2 - mineCount) {
         for (let i = 0; i < array.length; i++) {
             for (let j = 0; j < array[i].length; j++) {
                 array[i][j].disabled = true;
@@ -171,7 +174,6 @@ function clickBox(array, i, j) {
         container.style.display = "block"
         document.querySelector("#h1").textContent = "You Win"
     }
-    clickCounter++;
 }
 function showMine(array) {
     for (let i = 0; i < array.length; i++) {
@@ -194,10 +196,12 @@ function showMine(array) {
 function EventOfFlag(array, i, j) {
     if ((flagCount != 0) && (array[i][j].querySelector("#flag") === null) && (getComputedStyle(array[i][j]).backgroundColor !== "rgb(246, 240, 186)") && (getComputedStyle(array[i][j]).backgroundColor !== "rgb(250, 246, 215)")) {
         array[i][j].appendChild(flag.cloneNode(true))
+        array[i][j].disabled = true;
         flagCount--;
         flagText.textContent = flagCount;
     } else if (array[i][j].querySelector("#flag")) {
         array[i][j].removeChild(array[i][j].querySelector("#flag"))
+        array[i][j].disabled = false;
         flagCount++;
         flagText.textContent = flagCount;
     }
@@ -222,8 +226,6 @@ selectSize.style.display = "none";
 gameSize.addEventListener("click", function () {
     selectSize.style.display = selectSize.style.display === "none" ? "block" : "none";
 })
-
-
 menu.addEventListener("click", function () {
     mainItems.style.display = "none";
     while (gameBoard.firstChild) {
@@ -295,7 +297,6 @@ function updateTime(hour,min,sec){
     hour = hour < 10 ? "0" + hour : hour;
     return hour + ":" + min + ":" + sec;
 }
-
 
 
 
