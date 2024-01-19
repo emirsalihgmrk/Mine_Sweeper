@@ -15,7 +15,11 @@ let list2 = document.querySelector("#list2");
 let menu = document.querySelector("#menu");
 let mine = document.querySelector("#mine");
 let flag = document.createElement("img");
+let bestTimeText = "-----";
+let bestTimeText2 = "-----";
 let bestTime;
+let bestTime2;
+let isContinue = true;
 let clickCounter = 0;
 flag.src = "https://cdn.icon-icons.com/icons2/510/PNG/512/flag_icon-icons.com_50393.png"
 flag.id = "flag"
@@ -73,13 +77,13 @@ function randomItem(array) {
 function clickBox(array, i, j) {
     array[i][j].disabled = true;
     clickCounter++;
-    console.log(clickCounter)
     let counter = 0;
     let left = j - 1;
     let right = j + 1;
     let up = i - 1;
     let down = i + 1;
     if (array[i][j].querySelector("#mine") && (!array[i][j].querySelector("#flag"))) {
+        isContinue = false;
         for (let i = 0; i < array.length; i++) {
             for (let j = 0; j < array[i].length; j++) {
                 array[i][j].disabled = true;
@@ -90,7 +94,6 @@ function clickBox(array, i, j) {
         array[i][j].querySelector("#mine").style.visibility = "visible";
         timeText.textContent = "-----";
         firstClock.style.width = "60px";
-        clearTimeout(timeoutId);
         hour = 0;
         min = 0;
         sec = 0;
@@ -154,25 +157,40 @@ function clickBox(array, i, j) {
         }
     }
     if (clickCounter === array.length ** 2 - mineCount) {
+        isContinue = false;
         for (let i = 0; i < array.length; i++) {
             for (let j = 0; j < array[i].length; j++) {
                 array[i][j].disabled = true;
             }
         }
         flagCount = 0;
-        clearTimeout(timeoutId);
-        timeText.textContent = updateTime(hour,min,sec);
-        if((timeRecordText.textContent==="-----")||(bestTime > hour*3600+min*60+sec)){
-            bestTime = hour*3600+min*60+sec;
-            timeRecordText.textContent = updateTime(hour,min,sec);
+        if(rows==10){
+            timeText.textContent = clockText.textContent;
+            if((bestTimeText === "-----")||(bestTime > hour*3600+min*60+sec)){
+                bestTime = hour*3600+min*60+sec;
+                bestTimeText = timeText.textContent;
+            }
+            timeRecordText.textContent = bestTimeText;
+        }
+        if(rows==15){
+            timeText.textContent = clockText.textContent;
+            if((bestTimeText2 === "-----")||(bestTime2 > hour*3600+min*60+sec)){
+                bestTime2 = hour*3600+min*60+sec;
+                bestTimeText2 = timeText.textContent;
+            }
+            timeRecordText.textContent = bestTimeText2;
+        }
+        if((bestTimeText === "-----")||(bestTimeText2 === "-----")){
+            secondClock.style.width = "60px";
+        } else {
+            secondClock.style.width = "120px";
         }
         firstClock.style.width = "120px";
-        secondClock.style.width = "120px";
         hour = 0;
         min = 0;
         sec = 0;
-        container.style.display = "block"
-        document.querySelector("#h1").textContent = "You Win"
+        container.style.display = "block";
+        document.querySelector("#h1").textContent = "You Win";
     }
 }
 function showMine(array) {
@@ -208,6 +226,7 @@ function EventOfFlag(array, i, j) {
 }
 let restart = document.querySelector("#restart")
 restart.addEventListener("click", function () {
+    isContinue = true;
     clickCounter = 0;
     if (rows == 10) {
         flagCount = 15;
@@ -239,6 +258,7 @@ list1.addEventListener("click", function () {
     cols = 10;
     mineCount = 15;
     flagCount = 15;
+    timeRecordText.textContent = bestTimeText;
     gameBoard.style.gridTemplateRows = "repeat(10,60px)"
     gameBoard.style.gridTemplateColumns = "repeat(10,60px)"
     list1.style.color = "blueviolet";
@@ -249,6 +269,7 @@ list2.addEventListener("click", function () {
     cols = 15;
     mineCount = 35;
     flagCount = 35;
+    timeRecordText.textContent = bestTimeText2;
     gameBoard.style.gridTemplateRows = "repeat(15,40px)";
     gameBoard.style.gridTemplateColumns = "repeat(15,40px)";
     mine.style.height = "25px";
@@ -258,6 +279,7 @@ list2.addEventListener("click", function () {
 })
 let play = document.querySelector("#play")
 play.addEventListener("click", function () {
+    isContinue = true;
     mainItems.style.display = "block";
     clickCounter = 0;
     if (rows == 10) {
@@ -276,6 +298,9 @@ let min = 0;
 let sec = 0;
 let timeoutId;
 function timer(){
+    if(isContinue == false){
+        return;
+    }
     clockText.textContent = updateTime(hour,min,sec);
     sec++;
     if(sec==60){
