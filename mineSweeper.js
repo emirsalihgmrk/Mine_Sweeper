@@ -180,11 +180,7 @@ function clickBox(array, i, j) {
             }
             timeRecordText.textContent = bestTimeText2;
         }
-        if((bestTimeText === "-----")||(bestTimeText2 === "-----")){
-            secondClock.style.width = "60px";
-        } else {
-            secondClock.style.width = "120px";
-        }
+        secondClock.style.width = "120px";
         firstClock.style.width = "120px";
         hour = 0;
         min = 0;
