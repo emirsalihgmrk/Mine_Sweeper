@@ -79,7 +79,7 @@ h1{
 }
 .container{
     background-color: #ADFF2F;
-    display: block;
+    display: none;
 }
 body{
     background-color: #808080;
