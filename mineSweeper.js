@@ -184,7 +184,6 @@ function clickBox(array, i, j) {
             secondClock.style.width = "60px";
         } else {
             secondClock.style.width = "120px";
-            secondClock.style.textAlign = "center";
         }
         firstClock.style.width = "120px";
         hour = 0;
