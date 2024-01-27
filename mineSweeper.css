@@ -164,7 +164,7 @@ body{
 }
 .firstClock,.secondClock{
     text-align: center;
-    width: 120px;
+    width: 60px;
 }
 #timeText,#timeRecordText{
     font-size: 25px;
