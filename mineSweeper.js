@@ -183,9 +183,9 @@ function clickBox(array, i, j) {
         if((bestTimeText === "-----")||(bestTimeText2 === "-----")){
             secondClock.style.width = "60px";
         } else {
-            secondClock.style.width = "100px";
+            secondClock.style.width = "80px";
         }
-        firstClock.style.width = "100px";
+        firstClock.style.width = "80px";
         hour = 0;
         min = 0;
         sec = 0;

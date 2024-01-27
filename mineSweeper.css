@@ -78,7 +78,7 @@ h1{
     justify-content: space-evenly;
 }
 .container{
-    display: none;
+    display: block;
 }
 body{
     background-color: #808080;
